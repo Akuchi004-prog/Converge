@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Converge 2026
 
-## Getting Started
+Marketing site for **Converge 2026**, a two-day conference across Design, Engineering, and Product tracks. Built as part of a web development internship.
 
-First, run the development server:
+## Features
+
+- Day 1 / Day 2 toggle and Design / Engineering / Product track tabs
+- Per-track schedule with shared (cross-track) sessions
+- Session detail modal — abstract, speaker, room, and time, with an "Add to Calendar" link (Google Calendar)
+- Responsive layout
+
+## Stack
+
+- [Next.js 16](https://nextjs.org/) (App Router)
+- [Tailwind CSS v4](https://tailwindcss.com/)
+- TypeScript
+- Global CSS per component (no CSS Modules)
+
+## Getting started
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view it.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+app/
+  page.tsx         # Home page — day/track tabs, schedule, session modal
+  globals.css       # Base styles, tokens, header/track/schedule/modal styles
+  Footer.tsx        # Site footer
+  footer.css         # Footer styles
+```
 
-## Learn More
+## Conventions
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Component stylesheets (e.g. `footer.css`) are imported from the **page file**, not from within the component itself, to avoid CSS cascade conflicts from double-importing.
+- Track accent colors resolve through a single `--track` CSS variable, set per track via `[data-track="..."]`, rather than duplicated per-track class names.
+- Session times are stored as 24-hour `"HH:MM"` strings and formatted for display — never hand-typed as 12-hour strings.
