@@ -1,26 +1,445 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --muted: #475569;
+  --border: #e2e8f0;
+  --design: #f43f5e;
+  --engineering: #4f46e5;
+  --product: #0d9488;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+
+/* Track colour resolution — one variable drives every accent */
+[data-track="design"] {
+  --track: var(--design);
+}
+[data-track="engineering"] {
+  --track: var(--engineering);
+}
+[data-track="product"] {
+  --track: var(--product);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 80px;
+}
+
+/* ==== Header ==== */
+header {
+  background-color: #fff;
+  border-bottom: 2px solid var(--border);
+}
+
+.headerInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  padding: 20px 0;
+}
+
+.headerTitle {
+  margin: 0;
+  color: var(--foreground);
+  font-family: var(--font-outfit), var(--font-geist-sans), sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.headerTitle span {
+  color: var(--engineering);
+}
+
+.headerSubtitle {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* ==== Day toggle ==== */
+.dayTabs {
+  display: inline-flex;
+  gap: 6px;
+  background-color: var(--background);
+  padding: 5px;
+  border-radius: 999px;
+}
+
+.dayTab {
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 9px 20px;
+  border-radius: 999px;
+  color: var(--muted);
+  font-family: var(--font-outfit), var(--font-geist-sans), sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.dayTab:hover {
+  color: var(--foreground);
+}
+
+.dayTabActive {
+  background-color: #fff;
+  color: var(--foreground);
+  box-shadow: 0 1px 3px rgb(15 23 42 / 0.12);
+}
+
+/* ==== Track tabs ==== */
+.trackNavs {
+  display: inline-flex;
+  gap: 6px;
+  margin: 40px 0 24px;
+  padding: 5px;
+  background-color: #e2e8f095;
+  border-radius: 8px;
+}
+
+.trackBadge {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px 24px;
+  border-radius: 6px;
+  color: var(--track);
+  font-family: var(--font-outfit), var(--font-geist-sans), sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.trackBadgeActive {
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgb(15 23 42 / 0.1);
+}
+
+/* ==== Schedule ==== */
+.schedule {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-bottom: 80px;
+}
+
+.scheduleRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 28px;
+}
+
+.scheduleTime {
+  flex: 0 0 90px;
+  margin: 22px 0 0;
+  color: var(--muted);
+  font-family: var(--font-outfit), var(--font-geist-sans), sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: right;
+}
+
+.scheduleCard {
+  flex: 1;
+  display: block;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  background-color: #fff;
+  padding: 20px 24px;
+  border: 1px solid var(--border);
+  border-left: 6px solid var(--track);
+  border-radius: 10px;
+  font: inherit;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.scheduleCard:hover,
+.scheduleCard:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgb(15 23 42 / 0.08);
+  outline: none;
+}
+
+.scheduleCardShared {
+  border-left-color: #64748b;
+}
+
+.cardMeta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.sharedBadge {
+  background-color: #64748b;
+  color: #fff;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.cardTitle {
+  margin: 10px 0 6px;
+  color: var(--foreground);
+  font-family: var(--font-outfit), var(--font-geist-sans), sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.cardAbstract {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.cardSpeaker {
+  margin: 14px 0 0;
+  color: var(--foreground);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.cardSpeaker span {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+/* ==== Modal ==== */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background-color: rgb(15 23 42 / 0.55);
+  backdrop-filter: blur(2px);
+}
+
+.modal {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  max-height: 88vh;
+  overflow-y: auto;
+  background-color: #fff;
+  border-radius: 14px;
+  box-shadow: 0 24px 60px rgb(15 23 42 / 0.28);
+}
+
+.modalAccent {
+  display: block;
+  height: 5px;
+  background-color: var(--track);
+  border-radius: 14px 14px 0 0;
+}
+
+.modalHead {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px 24px 0;
+}
+
+.modalBadge {
+  margin: 0 0 10px;
+  display: inline-block;
+  color: var(--track);
+  background-color: color-mix(in srgb, var(--track) 12%, #fff);
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.modalTitle {
+  margin: 0;
+  color: var(--foreground);
+  font-family: var(--font-outfit), var(--font-geist-sans), sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.modalClose {
+  flex: 0 0 auto;
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: #fff;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 1;
+}
+
+.modalClose:hover {
+  background-color: var(--background);
+}
+
+.modalMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 16px 24px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.modalBody {
+  padding: 0 24px 20px;
+  border-top: 1px solid var(--border);
+}
+
+.modalSectionTitle {
+  margin: 18px 0 8px;
+  color: var(--foreground);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.modalAbstract {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.speakerCard {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  margin-top: 20px;
+  padding: 14px;
+  background-color: var(--background);
+  border-radius: 10px;
+}
+
+.speakerAvatar {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background-color: var(--track);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.speakerName {
+  margin: 0 0 4px;
+  color: var(--foreground);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.speakerBio {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.modalFooter {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 16px 24px;
+  background-color: var(--background);
+  border-top: 1px solid var(--border);
+  border-radius: 0 0 14px 14px;
+}
+
+.btnGhost,
+.btnPrimary {
+  padding: 9px 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btnGhost {
+  background-color: #fff;
+  border: 1px solid var(--border);
+  color: var(--foreground);
+}
+
+.btnPrimary {
+  background-color: var(--track);
+  border: 1px solid var(--track);
+  color: #fff;
+}
+
+.btnPrimary:hover {
+  filter: brightness(0.94);
+}
+
+/* ==== Responsive ==== */
+@media (max-width: 900px) {
+  .container {
+    padding: 0 24px;
+  }
+
+  .scheduleRow {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .scheduleTime {
+    margin: 0;
+    text-align: left;
+  }
+
+  .trackNavs,
+  .dayTabs {
+    max-width: 100%;
+    overflow-x: auto;
+  }
 }

@@ -1,0 +1,120 @@
+.siteFooter {
+  margin-top: 60px;
+  background-color: #0f172a;
+  color: #cbd5e1;
+}
+
+.footerTop {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  padding: 56px 0 40px;
+  border-bottom: 1px solid rgb(255 255 255 / 0.08);
+}
+
+.footerBrand {
+  flex: 1 1 240px;
+  min-width: 200px;
+}
+
+.footerLogo {
+  margin: 0;
+  color: #fff;
+  font-family: var(--font-outfit), var(--font-geist-sans), sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.footerLogo span {
+  color: var(--engineering);
+}
+
+.footerTagline {
+  margin: 8px 0 0;
+  color: #94a3b8;
+  font-size: 13px;
+}
+
+.footerCol {
+  flex: 1 1 140px;
+  min-width: 140px;
+}
+
+.footerColTitle {
+  margin: 0 0 14px;
+  color: #fff;
+  font-family: var(--font-outfit), var(--font-geist-sans), sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.footerLinks {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footerLinks a {
+  color: #cbd5e1;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.15s ease;
+}
+
+.footerLinks a:hover {
+  color: #fff;
+}
+
+/* Track links pick up their accent colour on hover, reusing the same
+   [data-track] variable pattern as the rest of the site */
+.footerLinks a[data-track]:hover {
+  color: var(--track);
+}
+
+.footerBottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px 0;
+}
+
+.footerBottom p {
+  margin: 0;
+  color: #94a3b8;
+  font-size: 13px;
+}
+
+.footerSocial {
+  display: flex;
+  gap: 18px;
+}
+
+.footerSocial a {
+  color: #94a3b8;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  transition: color 0.15s ease;
+}
+
+.footerSocial a:hover {
+  color: #fff;
+}
+
+@media (max-width: 640px) {
+  .footerTop {
+    padding: 40px 0 28px;
+  }
+
+  .footerBottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
